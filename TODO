@@ -1,0 +1,25 @@
+1) Refactor timesheet layout to component/view
+2) Use local storage as a sync for offline use
+    a) Tie local storage into Redux API
+    b) On APP start attempt sync
+    c) Error handling if site cannot be reached to store locally
+    d) Sync on site startup that will push hours
+    e) Sync Algorithm in Existing Hub Application
+        1)  select max engineer id from local & server
+        2)  max key = max(local, server)
+        3)  get all server hours ordered by engrKey
+        4)  loop through all:
+            a) check modified date to see if client or server is newer
+            if client newer:
+                b) if client entity deleted remove from server
+                c) else update server
+            if server newer:
+                just wait because we'll just update all of them...
+
+
+
+3) create forms/views for other components
+4) refactor project into same pycharm project
+5) need to figure out what to do about paging data...
+6) need to figure out how api should interact with joins...
+
