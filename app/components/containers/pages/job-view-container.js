@@ -1,6 +1,3 @@
-/**
- * Created by cwarren on 1/16/17.
- */
 import React from 'react';
 import JobView from '../../views/pages/job-view';
 import * as jobApi from '../../../api/job-api';
@@ -17,7 +14,10 @@ const JobViewContainer = React.createClass({
                 branch: null,
                 admin: null,
                 endCustomer: null,
-                currency: null
+                currency: null,
+                hours: [],
+                distances: [],
+                expenses: []
             };
         },
 
@@ -25,27 +25,43 @@ const JobViewContainer = React.createClass({
             jobApi.getJob(this.props.params.id, response => {
                 this.setState({job : response.data.data});
 
-                let branchID = response.data.data.branchID;
+                let branchID = response.data.data.attributes.branchID;
                 branchApi.getBranch(branchID, response => {
                     this.setState({branch: response.data.data});
                 });
 
-                let adminID = response.data.data.adminID;
+                let adminID = response.data.data.attributes.adminID;
                 engineerApi.getEngineer(adminID, response => {
                     this.setState({admin: response.data.data});
                 });
 
-                let endCustomerID = response.data.data.endCustomerID;
+                let endCustomerID = response.data.data.attributes.endCustomerID;
                 customerApi.getCustomer(endCustomerID, response => {
                     this.setState({endCustomer: response.data.data});
                 });
 
-                let currencyID = response.data.data.currencyID;
+                let currencyID = response.data.data.attributes.currencyID;
                 currencyApi.getCurrency(currencyID, response => {
                     this.setState({currency: response.data.data});
                 });
 
             });
+
+            jobApi.getJobHours(this.props.params.id, response => {
+                this.setState({hours: response.data.data});
+            });
+
+            jobApi.getJobDistances(this.props.params.id, response => {
+                this.setState({distances: response.data.data});
+            });
+
+            jobApi.getJobExpenses(this.props.params.id, response => {
+                this.setState({expenses: response.data.data});
+            });
+
+            // jobApi.getJobInvoices(this.props.params.id, response => {
+            //     this.setState({invoices: response.data});
+            // });
 
         },
 

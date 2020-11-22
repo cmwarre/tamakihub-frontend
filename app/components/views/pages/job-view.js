@@ -7,16 +7,58 @@ import { PageHeader } from 'react-bootstrap';
 
 export default function(props){
 
-    const replaceIfEmpty = function(value){
+    const replaceIfEmpty = function(value, replacement="-"){
         value = value ? value : "-";
         return value.toString().trim() ? value.toString().trim() : "-";
     };
 
-    if(props.job == null)
+    if(!(props.job && props.branch && props.endCustomer && props.admin && props.currency))
         return(<div>Loading...</div>);
     else {
         //TODO can I do this inline below???
-        const createdDate = new Date(props.job.attributes.created);
+        let createdDate = new Date(props.job.attributes.created);
+        let currency = props.currency.attributes.symbol;
+        let currencyCode = " " + props.currency.attributes.code;
+
+        let hoursCost = props.hours.length ?
+                props.hours.reduce((sum, hour) => {
+                    let quantity = parseFloat(hour.attributes.quantity);
+                    let rate = parseFloat(hour.attributes.rate);
+
+                    return sum + quantity * rate * Number(hour.attributes.bookTypeID == 1);
+                }, 0) : 0;
+
+        let hoursBookable = props.hours.length ? props.hours.reduce((sum, hour) => {
+            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID == 1);
+        }, 0) : 0;
+
+        let hoursNonBookable = props.hours.length ? props.hours.reduce((sum, hour) => {
+            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID == 2);
+        }, 0) : 0;
+
+        let hoursAgreement = props.hours.length ? props.hours.reduce((sum, hour) => {
+            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID > 2);
+        }, 0) : 0;
+
+        let expensesCost = props.expenses.length > 0 ?
+            props.expenses.reduce((sum, expenses) => {
+                let quantity = parseFloat(expenses.attributes.km);
+                let rate = expenses.attributes.rate ? parseFloat(expenses.attributes.rate) : 0;
+                let markup = expenses.attributes.markup ? expenses.attributes.markup : 0;
+
+                return sum + quantity * rate * (1 + markup/100);
+            }, 0) : 0;
+
+        let distancesCost = props.distances.length > 0 ?
+                props.distances.reduce((sum, distance) => {
+                    let quantity = parseFloat(distance.attributes.km);
+                    let value = distance.attributes.value ? parseFloat(distance.attributes.value) : 0;
+                    let markup = distance.attributes.markup ? parseFloat(distance.attributes.markup) : 0;
+
+                    return sum + quantity * value * (1 + markup/100);
+                }, 0) : 0;
+
+        let totalCost = hoursCost + expensesCost + distancesCost;
 
         return (
             <div className="container">
@@ -33,24 +75,34 @@ export default function(props){
                             <dd>{createdDate.toLocaleString()}</dd>
 
                             <dt>Branch</dt>
-                            <dd>{replaceIfEmpty(props.branch.attributes.branch)}</dd>
+                            <dd>
+                                <Link to={"/branches/" + props.job.attributes.branchID}>
+                                    {replaceIfEmpty(props.branch.attributes.name)}
+                                </Link>
+                            </dd>
 
                             <dt>Admin</dt>
-                            <dd>{replaceIfEmpty(props.admin.attributes.fullname)}</dd>
+                            <dd>
+                                <Link to={"/engineers/" + props.job.attributes.adminID}>
+                                    {replaceIfEmpty(props.admin.attributes.fullname)}
+                                </Link>
+                            </dd>
 
                             <dt>Customer</dt>
-                            <dd>{replaceIfEmpty(props.endCustomer.name)}</dd>
+                            <dd>
+                                <Link to={"/customers/" + props.job.attributes.endCustomerID}>
+                                    {replaceIfEmpty(props.endCustomer.attributes.name)}
+                                </Link>
+                            </dd>
 
                             <dt>Job Number</dt>
                             <dd>{replaceIfEmpty(props.job.attributes.jobNumber)}</dd>
 
                             <dt>Currency</dt>
-                            <dd>{replaceIfEmpty(props.currency.code)}</dd>
+                            <dd>{replaceIfEmpty(currencyCode)}</dd>
 
                             <dt>Quoted Value</dt>
-                            <dd>
-                                {replaceIfEmpty(props.currency.symbol) + replaceIfEmpty(props.job.attributes.quotedValue)}
-                            </dd>
+                            <dd>{currency + props.job.attributes.quotedValue.toString() + currencyCode}</dd>
 
                             <dt>Closed</dt>
                             <dd>{replaceIfEmpty(props.job.attributes.closed)}</dd>
@@ -64,13 +116,26 @@ export default function(props){
 
                         <dl>
                             <dt>Distance Rate</dt>
-                            <dd>{replaceIfEmpty(props.job.attributes.distanceRate)}</dd>
+                            <dd>{currency + props.job.attributes.distanceRate + currencyCode + " per KM"}</dd>
 
                             <dt>Distance Markup</dt>
-                            <dd>{replaceIfEmpty(props.job.attributes.distanceMarkup) + "%"}</dd>
+                            <dd>{props.job.attributes.distanceMarkup + "%"}</dd>
 
                             <dt>Expense Markup</dt>
-                            <dd>{replaceIfEmpty(props.job.attributes.expenseMarkup) + "%"}</dd>
+                            <dd>{props.job.attributes.expenseMarkup + "%"}</dd>
+                        </dl>
+
+                        <PageHeader><small>Hours</small></PageHeader>
+
+                        <dl>
+                            <dt>Bookable</dt>
+                            <dd>{replaceIfEmpty(hoursBookable)}</dd>
+
+                            <dt>Non-Bookable</dt>
+                            <dd>{replaceIfEmpty(hoursNonBookable, "0")}</dd>
+
+                            <dt>By Aggreement</dt>
+                            <dd>{replaceIfEmpty(hoursAgreement, "0")}</dd>
                         </dl>
 
                         <PageHeader><small>Financial Summary</small></PageHeader>
@@ -109,17 +174,19 @@ export default function(props){
 
                         <dl>
                             <dt>Hours Worked</dt>
-                            <dd>-</dd>
+                            <dd>{currency + hoursCost.toString() + currencyCode + " (" + hoursBookable.toString() + " Hours)" }</dd>
 
                             <dt>Expenses</dt>
-                            <dd>-</dd>
+                            <dd>{currency + expensesCost.toString() + currencyCode}</dd>
 
                             <dt>Distances</dt>
-                            <dd>-</dd>
+                            <dd>{currency + distancesCost.toString() + currencyCode}</dd>
 
                             <dt>Total Costs</dt>
-                            <dd>-</dd>
+                            <dd>{currency + totalCost.toString() + currencyCode}</dd>
                         </dl>
+
+                        <PageHeader><small></small></PageHeader>
 
                     </div>
 

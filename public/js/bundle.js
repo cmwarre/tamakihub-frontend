@@ -21122,19 +21122,23 @@
 	
 	var _branchViewContainer2 = _interopRequireDefault(_branchViewContainer);
 	
-	var _engineerViewContainer = __webpack_require__(915);
+	var _customerViewContainer = __webpack_require__(915);
+	
+	var _customerViewContainer2 = _interopRequireDefault(_customerViewContainer);
+	
+	var _engineerViewContainer = __webpack_require__(918);
 	
 	var _engineerViewContainer2 = _interopRequireDefault(_engineerViewContainer);
 	
-	var _jobViewContainer = __webpack_require__(917);
+	var _jobViewContainer = __webpack_require__(920);
 	
 	var _jobViewContainer2 = _interopRequireDefault(_jobViewContainer);
 	
-	var _payrollViewContainer = __webpack_require__(921);
+	var _payrollViewContainer = __webpack_require__(923);
 	
 	var _payrollViewContainer2 = _interopRequireDefault(_payrollViewContainer);
 	
-	var _entityTableContainer = __webpack_require__(924);
+	var _entityTableContainer = __webpack_require__(926);
 	
 	var _entityTableContainer2 = _interopRequireDefault(_entityTableContainer);
 	
@@ -21157,6 +21161,11 @@
 	            _reactRouter.Route,
 	            { path: '/branches/' },
 	            _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _branchViewContainer2.default })
+	        ),
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: '/customers/' },
+	            _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _customerViewContainer2.default })
 	        ),
 	        _react2.default.createElement(
 	            _reactRouter.Route,
@@ -27162,6 +27171,7 @@
 	                        this.props.children
 	                    )
 	                ),
+	                _react2.default.createElement(_reactBootstrap.PageHeader, null),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container-fluid' },
@@ -72184,6 +72194,11 @@
 	exports.getOpenJobs = getOpenJobs;
 	exports.searchJobs = searchJobs;
 	exports.getJob = getJob;
+	exports.getJobInvoices = getJobInvoices;
+	exports.getJobFunds = getJobFunds;
+	exports.getJobHours = getJobHours;
+	exports.getJobDistances = getJobDistances;
+	exports.getJobExpenses = getJobExpenses;
 	
 	var _index = __webpack_require__(808);
 	
@@ -72205,6 +72220,26 @@
 	
 	function getJob(id, onSuccess, onFailure) {
 	    return api.getOne("/jobs/", id, onSuccess, onFailure);
+	}
+	
+	function getJobInvoices(id, onSuccess, onFailure) {
+	    return api.get("/invoices/?jobID=" + id, onSuccess, onFailure);
+	}
+	
+	function getJobFunds(id, onSuccess, onFailure) {
+	    return api.get("/funds/?jobID=" + id, onSuccess, onFailure);
+	}
+	
+	function getJobHours(id, onSuccess, onFailure) {
+	    return api.get("/hours/?jobID=" + id, onSuccess, onFailure);
+	}
+	
+	function getJobDistances(id, onSuccess, onFailure) {
+	    return api.get("/distances/?jobID=" + id, onSuccess, onFailure);
+	}
+	
+	function getJobExpenses(id, onSuccess, onFailure) {
+	    return api.get("/expenses/?jobID=" + id, onSuccess, onFailure);
 	}
 
 /***/ },
@@ -72244,8 +72279,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var api_host = exports.api_host = 'http://127.0.0.1:8080';
-	//export const api_host = 'http://api.tamaki-control.com:8080';
+	//export const api_host='http://127.0.0.1:8080';
+	//export const api_host = 'http://192.168.1.17:8080';
+	var api_host = exports.api_host = 'http://api.tamaki-control.com:/hub';
 	
 	function get(uri, onSuccess, onFailure) {
 	
@@ -79001,117 +79037,6 @@
 	            'h1',
 	            null,
 	            'Home'
-	        ),
-	        _react2.default.createElement(
-	            _reactBootstrap.Carousel,
-	            null,
-	            _react2.default.createElement(
-	                _reactBootstrap.Carousel.Item,
-	                null,
-	                _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/img/carousel.png' }),
-	                _react2.default.createElement(
-	                    _reactBootstrap.Carousel.Caption,
-	                    null,
-	                    _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        'First slide label'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'This is the first slide'
-	                    )
-	                )
-	            ),
-	            _react2.default.createElement(
-	                _reactBootstrap.Carousel.Item,
-	                null,
-	                _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/img/carousel.png' }),
-	                _react2.default.createElement(
-	                    _reactBootstrap.Carousel.Caption,
-	                    null,
-	                    _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        'Second slide label'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'This is the second slide'
-	                    )
-	                )
-	            ),
-	            _react2.default.createElement(
-	                _reactBootstrap.Carousel.Item,
-	                null,
-	                _react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: '/img/carousel.png' }),
-	                _react2.default.createElement(
-	                    _reactBootstrap.Carousel.Caption,
-	                    null,
-	                    _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        'Third slide label'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'This is the third slide'
-	                    )
-	                )
-	            )
-	        ),
-	        _react2.default.createElement(
-	            'div',
-	            { className: 'container marketing' },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'row' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'col-lg-4' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        'Heading'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'col-lg-4' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        'Heading'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'col-lg-4' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        'Heading'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.'
-	                    )
-	                )
-	            )
 	        )
 	    );
 	};
@@ -80728,7 +80653,326 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _engineerView = __webpack_require__(916);
+	var _customerView = __webpack_require__(916);
+	
+	var _customerView2 = _interopRequireDefault(_customerView);
+	
+	var _customersApi = __webpack_require__(917);
+	
+	var customerApi = _interopRequireWildcard(_customersApi);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CustomerViewContainer = _react2.default.createClass({
+	    displayName: 'CustomerViewContainer',
+	
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            customer: null,
+	            jobs: [],
+	            invoice_addresses: []
+	        };
+	    },
+	
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+	
+	        customerApi.getCustomer(this.props.params.id, function (response) {
+	            _this.setState({ customer: response.data.data });
+	        });
+	
+	        customerApi.getCustomerJobs(this.props.params.id, function (response) {
+	            console.log(response);
+	            _this.setState({ jobs: response.data.data });
+	        });
+	
+	        customerApi.getCustomerInvoiceAddresses(this.props.params.id, function (response) {
+	            _this.setState({ invoice_addresses: response.data.data });
+	        });
+	    },
+	
+	    render: function render() {
+	        return _react2.default.createElement(_customerView2.default, this.state);
+	    }
+	});
+	
+	exports.default = CustomerViewContainer;
+
+/***/ },
+/* 916 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	exports.default = function (props) {
+	
+	    var replaceIfEmpty = function replaceIfEmpty(value) {
+	        value = value ? value : "-";
+	        return value.toString().trim() ? value.toString().trim() : "-";
+	    };
+	
+	    if (!(props.customer && props.jobs && props.invoice_addresses)) return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Loading...'
+	    );else {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'container' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-md-12' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.PageHeader,
+	                        null,
+	                        props.customer.attributes.name
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-md-6' },
+	                    _react2.default.createElement(
+	                        'dl',
+	                        null,
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Industry'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(props.customer.attributes.industryMajor)
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Sub-Industry'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(props.customer.attributes.industryMinor)
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Locations'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(props.customer.attributes.locations)
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Address'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(props.customer.attributes.address)
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Notes'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(props.customer.attributes.notes)
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-md-4' },
+	                    _react2.default.createElement(
+	                        'table',
+	                        { className: 'table table-striped table-responsive table-hover table-bordered' },
+	                        _react2.default.createElement(
+	                            'thead',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'th',
+	                                    null,
+	                                    'Job #'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Name'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            props.jobs.map(function (row, index) {
+	                                return index < 20 ? _react2.default.createElement(
+	                                    'tr',
+	                                    { key: row.id },
+	                                    _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            _reactRouter.Link,
+	                                            { to: "/jobs/" + row.id },
+	                                            row.attributes.jobNumber
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        row.attributes.name
+	                                    )
+	                                ) : null;
+	                            })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'table',
+	                        { className: 'table table-striped table-responsive table-hover table-bordered' },
+	                        _react2.default.createElement(
+	                            'thead',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'th',
+	                                    null,
+	                                    'Name'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    null,
+	                                    'Contact'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            props.invoice_addresses.map(function (row, index) {
+	                                return index < 20 ? _react2.default.createElement(
+	                                    'tr',
+	                                    { key: row.id },
+	                                    _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            _reactRouter.Link,
+	                                            { to: "/invoice-addresses/" + row.id },
+	                                            row.attributes.name
+	                                        )
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        row.attributes.contactName
+	                                    )
+	                                ) : null;
+	                            })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.PageHeader,
+	                        null,
+	                        _react2.default.createElement('small', null)
+	                    )
+	                )
+	            )
+	        );
+	    }
+	};
+	
+	var _react = __webpack_require__(80);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(266);
+	
+	var _reactBootstrap = __webpack_require__(332);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 917 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getCustomers = getCustomers;
+	exports.searchCustomers = searchCustomers;
+	exports.getCustomer = getCustomer;
+	exports.getCustomerJobs = getCustomerJobs;
+	exports.getCustomerInvoiceAddresses = getCustomerInvoiceAddresses;
+	
+	var _ = __webpack_require__(808);
+	
+	var api = _interopRequireWildcard(_);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function getCustomers() {
+	    return api.get("/customers/");
+	} /**
+	   * Created by cwarren on 12/4/16.
+	   */
+	function searchCustomers(query) {
+	    return api.search("/customers/", query);
+	}
+	
+	function getCustomer(id, onSuccess, onFailure) {
+	    return api.getOne("/customers/", id, onSuccess, onFailure);
+	}
+	
+	function getCustomerJobs(id, onSuccess, onFailure) {
+	    return api.get("/jobs/open?endCustomerID=" + id, onSuccess, onFailure);
+	}
+	
+	function getCustomerInvoiceAddresses(id, onSuccess, onFailure) {
+	    return api.get("/invoice-addresses/?customerID=" + id, onSuccess, onFailure);
+	}
+
+/***/ },
+/* 918 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(80);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _engineerView = __webpack_require__(919);
 	
 	var _engineerView2 = _interopRequireDefault(_engineerView);
 	
@@ -80768,7 +81012,7 @@
 	exports.default = EngineerViewContainer;
 
 /***/ },
-/* 916 */
+/* 919 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80940,7 +81184,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 917 */
+/* 920 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80953,7 +81197,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jobView = __webpack_require__(918);
+	var _jobView = __webpack_require__(921);
 	
 	var _jobView2 = _interopRequireDefault(_jobView);
 	
@@ -80969,11 +81213,11 @@
 	
 	var engineerApi = _interopRequireWildcard(_engineerApi);
 	
-	var _customersApi = __webpack_require__(919);
+	var _customersApi = __webpack_require__(917);
 	
 	var customerApi = _interopRequireWildcard(_customersApi);
 	
-	var _currencyApi = __webpack_require__(920);
+	var _currencyApi = __webpack_require__(922);
 	
 	var currencyApi = _interopRequireWildcard(_currencyApi);
 	
@@ -80991,7 +81235,10 @@
 	            branch: null,
 	            admin: null,
 	            endCustomer: null,
-	            currency: null
+	            currency: null,
+	            hours: [],
+	            distances: [],
+	            expenses: []
 	        };
 	    },
 	
@@ -81001,38 +81248,53 @@
 	        jobApi.getJob(this.props.params.id, function (response) {
 	            _this.setState({ job: response.data.data });
 	
-	            var branchID = response.data.data.branchID;
+	            var branchID = response.data.data.attributes.branchID;
 	            branchApi.getBranch(branchID, function (response) {
 	                _this.setState({ branch: response.data.data });
 	            });
 	
-	            var adminID = response.data.data.adminID;
+	            var adminID = response.data.data.attributes.adminID;
 	            engineerApi.getEngineer(adminID, function (response) {
 	                _this.setState({ admin: response.data.data });
 	            });
 	
-	            var endCustomerID = response.data.data.endCustomerID;
+	            var endCustomerID = response.data.data.attributes.endCustomerID;
 	            customerApi.getCustomer(endCustomerID, function (response) {
 	                _this.setState({ endCustomer: response.data.data });
 	            });
 	
-	            var currencyID = response.data.data.currencyID;
+	            var currencyID = response.data.data.attributes.currencyID;
 	            currencyApi.getCurrency(currencyID, function (response) {
 	                _this.setState({ currency: response.data.data });
 	            });
 	        });
+	
+	        jobApi.getJobHours(this.props.params.id, function (response) {
+	            _this.setState({ hours: response.data.data });
+	        });
+	
+	        jobApi.getJobDistances(this.props.params.id, function (response) {
+	            _this.setState({ distances: response.data.data });
+	        });
+	
+	        jobApi.getJobExpenses(this.props.params.id, function (response) {
+	            _this.setState({ expenses: response.data.data });
+	        });
+	
+	        // jobApi.getJobInvoices(this.props.params.id, response => {
+	        //     this.setState({invoices: response.data});
+	        // });
 	    },
 	
 	    render: function render() {
 	        return _react2.default.createElement(_jobView2.default, this.state);
 	    }
-	}); /**
-	     * Created by cwarren on 1/16/17.
-	     */
+	});
+	
 	exports.default = JobViewContainer;
 
 /***/ },
-/* 918 */
+/* 921 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81044,17 +81306,58 @@
 	exports.default = function (props) {
 	
 	    var replaceIfEmpty = function replaceIfEmpty(value) {
+	        var replacement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "-";
+	
 	        value = value ? value : "-";
 	        return value.toString().trim() ? value.toString().trim() : "-";
 	    };
 	
-	    if (props.job == null) return _react2.default.createElement(
+	    if (!(props.job && props.branch && props.endCustomer && props.admin && props.currency)) return _react2.default.createElement(
 	        'div',
 	        null,
 	        'Loading...'
 	    );else {
 	        //TODO can I do this inline below???
 	        var createdDate = new Date(props.job.attributes.created);
+	        var currency = props.currency.attributes.symbol;
+	        var currencyCode = " " + props.currency.attributes.code;
+	
+	        var hoursCost = props.hours.length ? props.hours.reduce(function (sum, hour) {
+	            var quantity = parseFloat(hour.attributes.quantity);
+	            var rate = parseFloat(hour.attributes.rate);
+	
+	            return sum + quantity * rate * Number(hour.attributes.bookTypeID == 1);
+	        }, 0) : 0;
+	
+	        var hoursBookable = props.hours.length ? props.hours.reduce(function (sum, hour) {
+	            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID == 1);
+	        }, 0) : 0;
+	
+	        var hoursNonBookable = props.hours.length ? props.hours.reduce(function (sum, hour) {
+	            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID == 2);
+	        }, 0) : 0;
+	
+	        var hoursAgreement = props.hours.length ? props.hours.reduce(function (sum, hour) {
+	            return sum + parseFloat(hour.attributes.quantity) * Number(hour.attributes.bookTypeID > 2);
+	        }, 0) : 0;
+	
+	        var expensesCost = props.expenses.length > 0 ? props.expenses.reduce(function (sum, expenses) {
+	            var quantity = parseFloat(expenses.attributes.km);
+	            var rate = expenses.attributes.rate ? parseFloat(expenses.attributes.rate) : 0;
+	            var markup = expenses.attributes.markup ? expenses.attributes.markup : 0;
+	
+	            return sum + quantity * rate * (1 + markup / 100);
+	        }, 0) : 0;
+	
+	        var distancesCost = props.distances.length > 0 ? props.distances.reduce(function (sum, distance) {
+	            var quantity = parseFloat(distance.attributes.km);
+	            var value = distance.attributes.value ? parseFloat(distance.attributes.value) : 0;
+	            var markup = distance.attributes.markup ? parseFloat(distance.attributes.markup) : 0;
+	
+	            return sum + quantity * value * (1 + markup / 100);
+	        }, 0) : 0;
+	
+	        var totalCost = hoursCost + expensesCost + distancesCost;
 	
 	        return _react2.default.createElement(
 	            'div',
@@ -81099,7 +81402,11 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.branch.attributes.branch)
+	                            _react2.default.createElement(
+	                                _reactRouter.Link,
+	                                { to: "/branches/" + props.job.attributes.branchID },
+	                                replaceIfEmpty(props.branch.attributes.name)
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81109,7 +81416,11 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.admin.attributes.fullname)
+	                            _react2.default.createElement(
+	                                _reactRouter.Link,
+	                                { to: "/engineers/" + props.job.attributes.adminID },
+	                                replaceIfEmpty(props.admin.attributes.fullname)
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81119,7 +81430,11 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.endCustomer.name)
+	                            _react2.default.createElement(
+	                                _reactRouter.Link,
+	                                { to: "/customers/" + props.job.attributes.endCustomerID },
+	                                replaceIfEmpty(props.endCustomer.attributes.name)
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81139,7 +81454,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.currency.code)
+	                            replaceIfEmpty(currencyCode)
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81149,7 +81464,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.currency.symbol) + replaceIfEmpty(props.job.attributes.quotedValue)
+	                            currency + props.job.attributes.quotedValue.toString() + currencyCode
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81192,7 +81507,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.job.attributes.distanceRate)
+	                            currency + props.job.attributes.distanceRate + currencyCode + " per KM"
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81202,7 +81517,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.job.attributes.distanceMarkup) + "%"
+	                            props.job.attributes.distanceMarkup + "%"
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81212,7 +81527,50 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            replaceIfEmpty(props.job.attributes.expenseMarkup) + "%"
+	                            props.job.attributes.expenseMarkup + "%"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.PageHeader,
+	                        null,
+	                        _react2.default.createElement(
+	                            'small',
+	                            null,
+	                            'Hours'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'dl',
+	                        null,
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Bookable'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(hoursBookable)
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'Non-Bookable'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(hoursNonBookable, "0")
+	                        ),
+	                        _react2.default.createElement(
+	                            'dt',
+	                            null,
+	                            'By Aggreement'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dd',
+	                            null,
+	                            replaceIfEmpty(hoursAgreement, "0")
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -81341,7 +81699,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            '-'
+	                            currency + hoursCost.toString() + currencyCode + " (" + hoursBookable.toString() + " Hours)"
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81351,7 +81709,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            '-'
+	                            currency + expensesCost.toString() + currencyCode
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81361,7 +81719,7 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            '-'
+	                            currency + distancesCost.toString() + currencyCode
 	                        ),
 	                        _react2.default.createElement(
 	                            'dt',
@@ -81371,8 +81729,13 @@
 	                        _react2.default.createElement(
 	                            'dd',
 	                            null,
-	                            '-'
+	                            currency + totalCost.toString() + currencyCode
 	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.PageHeader,
+	                        null,
+	                        _react2.default.createElement('small', null)
 	                    )
 	                )
 	            )
@@ -81391,39 +81754,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 919 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getCustomers = getCustomers;
-	exports.searchCustomers = searchCustomers;
-	exports.getCustomer = getCustomer;
-	
-	var _ = __webpack_require__(808);
-	
-	var api = _interopRequireWildcard(_);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function getCustomers() {
-	    return api.get("/customers/");
-	} /**
-	   * Created by cwarren on 12/4/16.
-	   */
-	function searchCustomers(query) {
-	    return api.search("/customers/", query);
-	}
-	
-	function getCustomer(id, onSuccess, onFailure) {
-	    return api.getOne("/customers/", id, onSuccess, onFailure);
-	}
-
-/***/ },
-/* 920 */
+/* 922 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -81455,7 +81786,7 @@
 	}
 
 /***/ },
-/* 921 */
+/* 923 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81468,11 +81799,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _payrollView = __webpack_require__(922);
+	var _payrollView = __webpack_require__(924);
 	
 	var _payrollView2 = _interopRequireDefault(_payrollView);
 	
-	var _payrollApi = __webpack_require__(923);
+	var _payrollApi = __webpack_require__(925);
 	
 	var payrollApi = _interopRequireWildcard(_payrollApi);
 	
@@ -81517,7 +81848,7 @@
 	exports.default = PayrollViewContainer;
 
 /***/ },
-/* 922 */
+/* 924 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81579,7 +81910,7 @@
 	                        _react2.default.createElement(
 	                            'dt',
 	                            null,
-	                            'Last Modified'
+	                            'Last Modified By'
 	                        ),
 	                        _react2.default.createElement(
 	                            'dd',
@@ -81720,7 +82051,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 923 */
+/* 925 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -81762,7 +82093,7 @@
 	}
 
 /***/ },
-/* 924 */
+/* 926 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81779,13 +82110,13 @@
 	
 	var _entityTable2 = _interopRequireDefault(_entityTable);
 	
-	var _searchForm = __webpack_require__(925);
+	var _searchForm = __webpack_require__(927);
 	
 	var _searchForm2 = _interopRequireDefault(_searchForm);
 	
 	var _reactRedux = __webpack_require__(893);
 	
-	var _skillApi = __webpack_require__(926);
+	var _skillApi = __webpack_require__(928);
 	
 	var skillApi = _interopRequireWildcard(_skillApi);
 	
@@ -81813,39 +82144,39 @@
 	
 	var branchesApi = _interopRequireWildcard(_branchesApi);
 	
-	var _payrollApi = __webpack_require__(923);
+	var _payrollApi = __webpack_require__(925);
 	
 	var payrollApi = _interopRequireWildcard(_payrollApi);
 	
-	var _customersApi = __webpack_require__(919);
+	var _customersApi = __webpack_require__(917);
 	
 	var customerApi = _interopRequireWildcard(_customersApi);
 	
-	var _dailyAllowanceRatesApi = __webpack_require__(927);
+	var _dailyAllowanceRatesApi = __webpack_require__(929);
 	
 	var dailyAllowanceRatesApi = _interopRequireWildcard(_dailyAllowanceRatesApi);
 	
-	var _purchaseOrdersApi = __webpack_require__(928);
+	var _purchaseOrdersApi = __webpack_require__(930);
 	
 	var purchaseOrdersApi = _interopRequireWildcard(_purchaseOrdersApi);
 	
-	var _invoicesApi = __webpack_require__(929);
+	var _invoicesApi = __webpack_require__(931);
 	
 	var invoicesApi = _interopRequireWildcard(_invoicesApi);
 	
-	var _rateGroupsApi = __webpack_require__(930);
+	var _rateGroupsApi = __webpack_require__(932);
 	
 	var rateGroupsApi = _interopRequireWildcard(_rateGroupsApi);
 	
-	var _currencyApi = __webpack_require__(920);
+	var _currencyApi = __webpack_require__(922);
 	
 	var currencyApi = _interopRequireWildcard(_currencyApi);
 	
-	var _clientReleasesApi = __webpack_require__(931);
+	var _clientReleasesApi = __webpack_require__(933);
 	
 	var clientReleasesApi = _interopRequireWildcard(_clientReleasesApi);
 	
-	var _changeRequestsApi = __webpack_require__(932);
+	var _changeRequestsApi = __webpack_require__(934);
 	
 	var changeRequestsApi = _interopRequireWildcard(_changeRequestsApi);
 	
@@ -81877,7 +82208,7 @@
 	            linkingField: "name",
 	            headers: ["Name", "Job Number", "Closed", "Quoted Value"],
 	            showColumns: ["jobNumber", "closed", "quotedValue"],
-	            get: jobApi.getJobs,
+	            get: jobApi.getOpenJobs,
 	            search: jobApi.searchJobs
 	        },
 	        engineers: {
@@ -82085,7 +82416,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(EntityTableContainer);
 
 /***/ },
-/* 925 */
+/* 927 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82126,7 +82457,7 @@
 	});
 
 /***/ },
-/* 926 */
+/* 928 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82152,7 +82483,7 @@
 	}
 
 /***/ },
-/* 927 */
+/* 929 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82179,7 +82510,7 @@
 	}
 
 /***/ },
-/* 928 */
+/* 930 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82206,7 +82537,7 @@
 	}
 
 /***/ },
-/* 929 */
+/* 931 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82233,7 +82564,7 @@
 	}
 
 /***/ },
-/* 930 */
+/* 932 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82260,7 +82591,7 @@
 	}
 
 /***/ },
-/* 931 */
+/* 933 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -82287,7 +82618,7 @@
 	}
 
 /***/ },
-/* 932 */
+/* 934 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

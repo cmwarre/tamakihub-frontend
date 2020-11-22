@@ -14,3 +14,11 @@ export function searchCustomers(query){
 export function getCustomer(id, onSuccess, onFailure){
     return api.getOne("/customers/", id, onSuccess, onFailure);
 }
+
+export function getCustomerJobs(id, onSuccess, onFailure){
+    return api.get("/jobs/open?endCustomerID=" + id, onSuccess, onFailure);
+}
+
+export function getCustomerInvoiceAddresses(id, onSuccess, onFailure){
+    return api.get("/invoice-addresses/?customerID=" + id, onSuccess, onFailure);
+}

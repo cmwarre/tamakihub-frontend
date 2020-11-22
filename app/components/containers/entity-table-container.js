@@ -43,7 +43,7 @@ const EntityTableContainer = React.createClass({
             linkingField: "name",
             headers: ["Name", "Job Number", "Closed", "Quoted Value"],
             showColumns: ["jobNumber", "closed", "quotedValue"],
-            get: jobApi.getJobs,
+            get: jobApi.getOpenJobs,
             search: jobApi.searchJobs
         },
         engineers: {

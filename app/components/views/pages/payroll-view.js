@@ -32,7 +32,7 @@ export default function(props){
                             <dt>Date Created</dt>
                             <dd>{createdDate.toLocaleString()}</dd>
 
-                            <dt>Last Modified</dt>
+                            <dt>Last Modified By</dt>
                             <dd>{modifiedDate.toLocaleString()}</dd>
 
                             <dt>Name</dt>

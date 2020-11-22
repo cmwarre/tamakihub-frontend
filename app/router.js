@@ -7,7 +7,9 @@ import TimesheetLayout from './components/layouts/timesheet-layout';
 import Home from './components/pages/home';
 import Login from './components/pages/login';
 
+
 import BranchViewContainer from './components/containers/pages/branch-view-container';
+import CustomerViewContainer from './components/containers/pages/customer-view-container';
 import EngineerViewContainer from './components/containers/pages/engineer-view-container';
 import JobViewContainer from './components/containers/pages/job-view-container';
 import PayrollViewContainer from './components/containers/pages/payroll-view-container';
@@ -25,6 +27,10 @@ export default (
 
             <Route path="/branches/">
                 <Route path=":id" component={BranchViewContainer} />
+            </Route>
+
+            <Route path="/customers/">
+                <Route path=":id" component={CustomerViewContainer} />
             </Route>
 
             <Route path="/jobs/">

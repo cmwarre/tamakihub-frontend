@@ -23,3 +23,11 @@
 5) need to figure out what to do about paging data...
 6) need to figure out how api should interact with joins...
 
+Distances need rate and markup in entry
+
+
+
+Plan:
+    1) Make website work for all customers/jobs/invoices/POs/hours/engineers
+    2) Make reports to replace existing
+    3) Fun little dashboard things

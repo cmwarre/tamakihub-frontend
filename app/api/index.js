@@ -3,8 +3,9 @@ import router from '../router';
 import store from '../store';
 import * as entityTableActions from '../actions/entity-table-actions';
 
-export const api_host = 'http://127.0.0.1:8080';
-//export const api_host = 'http://api.tamaki-control.com:8080';
+//export const api_host='http://127.0.0.1:8080';
+//export const api_host = 'http://192.168.1.17:8080';
+export const api_host = 'http://api.tamaki-control.com:/hub';
 
 export function get(uri, onSuccess, onFailure){
 

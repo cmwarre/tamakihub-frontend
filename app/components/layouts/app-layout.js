@@ -1,6 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, PageHeader } from 'react-bootstrap';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/less/bootstrap.less';
 import 'react-widgets/lib/less/react-widgets.less';
@@ -124,6 +124,7 @@ var AppLayout = React.createClass({
                             {this.props.children}
                         </div>
                     </div>
+                    <PageHeader/>
                     <div className="container-fluid">
                         <div className="row">
                             <Navbar fixedBottom>
